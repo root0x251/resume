@@ -1,0 +1,341 @@
+:root {
+    --h1-color: #a2a2a2;
+    --h2-color: #ff5722;
+    --h3-color: #a1a1a1;
+    --h4-color: #444;
+    --h5-color: #2d2d2d;
+    --h6-color: #a2a2a2;
+    --title-text-color: #606060;
+    --text-color: #8a8a8a;
+    --a-color: #373737;
+    --red-color: #ff5722;
+
+
+}
+
+/*START loader*/
+#page {
+    display: none;
+}
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3rem;
+    height: 3rem;
+}
+
+.spinner-grow {
+    background: var(--red-color);
+}
+
+/*END loader*/
+
+body {
+    font-family: hind, sans-serif;
+    line-height: 1.5em;
+    color: var(--text-color);
+    font-weight: 300;
+    background: #f8f8f8;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2em;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 1.6em;
+    color: var(--h2-color);
+}
+
+h3 {
+    font-size: .8em;
+    margin-bottom: 20px;
+    color: var(--h3-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-right: 30px;
+    text-align: right;
+}
+
+h4 {
+    font-size: .8em;
+    margin-bottom: 5px;
+    color: var(--h4-color);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+h5 {
+    margin: 0;
+    line-height: 1;
+    font-size: 0.85em;
+    color: var(--h5-color);
+    font-weight: 500;
+}
+
+a:any-link {
+    color: var(--red-color);
+}
+
+.header {
+    padding: 50px 0;
+    margin: 0;
+    position: relative;
+    border-top: 5px solid var(--red-color);
+}
+
+/*
+.header .profile-img {
+    margin-right: 30px;
+}
+*/
+
+.carousel-inner > .item > a > img,
+.carousel-inner > .item > img,
+.img-responsive,
+.thumbnail a > img,
+.thumbnail > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.header .name-wrapper h1 {
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0 0 5px;
+    color: var(--title-text-color);
+}
+
+.header .name-wrapper {
+    margin-bottom: 1.5em;
+}
+
+.header p {
+    font-size: 0.9em;
+}
+
+.header .personal-details {
+    line-height: 1.5em;
+}
+
+.header .personal-details strong {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: #373737;
+    text-transform: uppercase;
+}
+
+.header .personal-details small {
+    display: block;
+    font-size: 0.8em;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.header .personal-details span {
+    color: #8a8a8a;
+}
+
+.header .personal-details::before {
+    content: '';
+    margin: 1em;
+}
+
+.header .social-icon {
+    margin: 20px 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+}
+
+.header .social-icon li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.header .social-icon li a {
+    display: block;
+    font-size: 12px;
+    color: #333;
+    width: 34px;
+    height: 34px;
+    line-height: 33px;
+    text-align: center;
+    border-radius: 2px;
+    border: 2px solid #eee;
+}
+
+/* START Technical skill */
+.technical-skill-wrapper {
+    padding: 3em 0;
+}
+
+.technical-skill-wrapper .section-title {
+    text-align: right;
+}
+
+.technical-skill-wrapper .expertise-item p {
+    padding: 5px 0 20px 0;
+    color: var(--text-color);
+    font-size: .9em;
+}
+
+/* END Technical skill */
+
+
+/*START skills*/
+.skills-wrapper .section-title {
+    text-align: right;
+}
+
+.progress-item {
+    position: relative;
+}
+
+.progress-item .progress-title {
+    font-size: 12px;
+    font-weight: 400;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.progress-item .progress {
+    height: 2px;
+    box-shadow: none;
+    border-radius: 0;
+    background: 0 0;
+}
+
+.progress {
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.progress-item .progress-bar {
+    background-color: var(--red-color);
+    box-shadow: none;
+    text-align: right;
+}
+
+.progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #337ab7;
+}
+
+.progress-item .progress-percent {
+    font-size: 10px;
+    background-color: #313131;
+    position: absolute;
+    top: 5px;
+    padding: 0 8px;
+    border-radius: 3px;
+}
+
+.progress-item .progress-percent::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    border-top: 6px solid #313131;
+    border-right: 8px solid transparent;
+}
+
+.skills-wrapper .section-instruction strong,
+samll {
+    font-size: 0.75em;
+    color: #bebebe;
+}
+
+/*
+.skills-wrapper .section-instruction samll {
+    font-size: 0.75em;
+}
+*/
+
+/*END skills*/
+
+/*START expirience*/
+.section-experience {
+    padding: 3em 0;
+}
+
+.section-experience small {
+    /*    font-size: 0.75em;*/
+}
+
+.section-experience p {
+    font-size: 0.8em;
+}
+
+/*END expirience*/
+
+/*START education*/
+.section-education p {
+    font-size: 0.8em;
+}
+
+/*END education*/
+
+/*START portfolio*/
+.section-portfolio {
+    padding: 3em 0;
+}
+
+.section-portfolio .title-text {
+    color: var(--title-color) !important;
+    font-weight: 500;
+}
+
+.section-portfolio a:any-link {
+    color: var(--white) !important;
+}
+
+.overlay .mask {
+/*    background: rgba(121, 121, 121, 0.2);*/
+    background: rgba(255, 87, 34, 0.5);
+}
+
+/*END portfolio*/
+
+/*START footer*/
+.footer {
+    padding: 30px 0;
+    text-align: right;
+}
+
+.footer .copyright-section {
+    font-size: .8em;
+}
+
+.footer .copyright-section .copytext {
+    font-weight: 400;
+    display: block;
+}
+
+.footer .copyright-section .copytext a:any-link {
+    color: var(--red-color);
+}
+
+/*END footer*/
+
+@media (max-width: 768px) {
+    h3 {
+        text-align: left;
+    }
+}

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Вячеслав Алексеевич</title>
+    <!-- MDB icon -->
+    <link rel="icon" th:href="@{img/mdb-favicon.ico}" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/yandex/css/bootstrap.min.css}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" th:href="@{/yandex/css/mdb.min.css}">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" th:href="@{/resumeCss/style.css}">
+</head>
+
+<body onload="load()">
+<div id="loader" class="spinner-grow" role="status"></div>
+<!-- Start your project here-->
+<div id="page">
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-img">
+                        <img th:src="@{/resumeImg/photo.jpeg}" class="img-responsive" alt="">
+                    </div>
+                    <ul class="social-icon">
+                        <li><a href="#" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-slack" aria-hidden="true"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="name-wrapper">
+                        <h1 class="name">Бортниченко Вячеслав</h1>
+                        <h2>Java developer</h2>
+                    </div>
+                    <p>
+                        Начинающий Java разработчик. Обучаюсь самостоятельно при наличии мануала.
+
+
+                        Не испытываю сложностей при общении с людьми любого статуса. Опыт работы в условиях нестабильного рабочего дня. Легко адаптируюсь к новым условиям труда. Занимаюсь изучением и разработкой Java приложений. Знаком с системами управления базами данных. Планирую в течении года повысить квалификацию на один уровень. <br>
+                        Готов к любым задачам. <br>
+                        Для связи <a href="http://t-do.ru/root0x251">телеграмм</a>.
+
+                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="personal-details">
+                                <strong>город</strong>
+                                <small>санкт-петербург</small>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="personal-details">
+                                <strong>Национальность</strong>
+                                <small>русский</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="personal-details">
+                                <strong>Год рождения</strong>
+                                <small>05/06/1992 (27 лет)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="personal-details">
+                                <strong>контактный номер</strong>
+                                <small><a href="tel:+7(981)770-21-04">+7(981)770-21-04</a></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="personal-details">
+                                <strong>E-mail</strong>
+                                <small class="mail"><a href="mailto:rtootik@gmail.com">rtootik@gmail.com</a></small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    <!--<ul class="social-icon">
+                    <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-slack" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
+                </ul>-->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--  START Technical skill  -->
+    <section class="technical-skill-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="section-title">
+                        <h3>Технические навыки</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="expertise-item">
+                                <h4>Администрирование</h4>
+                                <p>Windows Server 2003, Windows Server 2012, Windows 7, Windows XP, IP-телефонии, IP-видеонаблюдение</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="expertise-item">
+                                <h4>Работа с персоналом</h4>
+                                <p>Количество пользователей: ~50, техническая поддержка, инструктаж и обучение</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="expertise-item">
+                                <h4>Монтаж</h4>
+                                <p>Монтаж слаботочных систем, установка камер IP-видеонаблюдения, СКУД</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="expertise-item">
+                                <h4>Java dev</h4>
+                                <p>Опыт использования: <br>
+                                    - библиотек и фреймворков (Spring, Hibernate, BootStrap) <br>
+                                    - СУБД (Postgresql, MySQL) <br>
+                                    - систем сборки (Maven, Gradle) <br>
+                                    - веб-серверов (WildFly, Tomcat)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--  END Technical skill  -->
+
+    <!--  START Skill  -->
+    <section class="skills-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="section-title">
+                        <h3>Технологии</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="progress-wrapper">
+                                <h4>Программирование</h4>
+                                <div class="progress-item">
+                                    <span class="progress-title">Java</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="progress-percent" style="margin-left: 60%;">60%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Fpring Framework</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: 38%">
+                                            <span class="progress-percent" style="margin-left: 38%;">38%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">SQL</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100" style="width: 32%">
+                                            <span class="progress-percent" style="margin-left: 32%;">32%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">JDBC</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">
+                                            <span class="progress-percent" style="margin-left: 25%;">25%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">HTML5</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                            <span class="progress-percent" style="margin-left: 70%;">70%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">CCS3</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%">
+                                            <span class="progress-percent" style="margin-left: 78%;">78%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Swift</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="progress-percent" style="margin-left: 60%;">60%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Git</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                                            <span class="progress-percent" style="margin-left: 50%;">50%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="progress-wrapper">
+                                <h4>Администрирование</h4>
+                                <div class="progress-item">
+                                    <span class="progress-title">Windows 10</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 73%">
+                                            <span class="progress-percent" style="margin-left: 73%;">73%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Windows 7</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                            <span class="progress-percent" style="margin-left: 85%;">85%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Mac OS</span>
+                                    <div class="progress">
+                                        <div class="progress-bar " role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%">
+                                            <span class="progress-percent" style="margin-left: 72%;">72%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">MS Office</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                            <span class="progress-percent" style="margin-left: 100%;">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Сетевое оборудование</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" style="width: 81%">
+                                            <span class="progress-percent" style="margin-left: 81%;">81%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Техническое обслуживание</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                            <span class="progress-percent" style="margin-left: 100%;">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">Ремонт ПК</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                            <span class="progress-percent" style="margin-left: 100%;">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-item">
+                                    <span class="progress-title">СКУД</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                            <span class="progress-percent" style="margin-left: 100%;">100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row section-instruction">
+                            <div class="col-md-4">
+                                <strong>0%-32%</strong>
+                                <samll>базовый</samll>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>33%-65%</strong>
+                                <samll>средний</samll>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>66%-100%</strong>
+                                <samll>продвинутый</samll>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  END Skill  -->
+    <!--  START expirience  -->
+    <section class="section-wrapper section-experience">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="section-title">
+                        <h3>Опыт</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="content-item">
+                                <small>2013 - по настоящее время (7 лет)</small>
+                                <h4>Системный инженер</h4>
+                                <h5>Комитет по образованию</h5>
+                                <p>г. Всеволожск</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="content-item">
+                                <small>2019 - по настоящее время</small>
+                                <h4>Java developer</h4>
+                                <h5>Freelance</h5>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="content-item">
+                                <small>2017 - 2019</small>
+                                <h4>iOS developer</h4>
+                                <h5>Freelance</h5>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+    <!--  END expirience  -->
+    <!--  START education  -->
+    <section class="section-wrapper section-education">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="section-title">
+                        <h3>Образование</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="content-item">
+                                <small>2013 - 2019 (высшее)</small>
+                                <h4>Санкт-Петербургский государственный университет аэрокосмического приборостроения, Санкт-Петербург</h4>
+                                <h5>Информационные системы и технологии</h5>
+                                <p>Информационные системы и технологии в бизнесе</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="content-item">
+                                <small>2011 - 2013 (среднее-техническое)</small>
+                                <h4>Санкт-Петербургский физико-механический инженерный колледж им. С.А.Зверева</h4>
+                                <h5>Информационные технолоигии</h5>
+                                <p>Информационная безопасность</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  END education  -->
+
+    <!--  START portfolio  -->
+    <section class="section-wrapper section-portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="section-title">
+                        <h3>Портфолио</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <a href="https://bortnichenko-resume.herokuapp.com/translator-ya" target="_blank">
+                                <div class="view overlay zoom">
+                                    <img th:src="@{/resumeImg/portfolio/p1.png}" class="img-fluid " alt="zoom">
+                                    <div class="mask flex-center waves-effect waves-light">
+                                        <p class="title-text">Онлайн переводчик</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <a href="https://vsevobr.ru" target="_blank">
+                                <div class="view overlay zoom">
+                                    <img th:src="@{/resumeImg/portfolio/p2.png}" class="img-fluid " alt="zoom">
+                                    <div class="mask flex-center waves-effect waves-light">
+                                        <p class="title-text">Информационный портал</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <a href="https://bortnichenko-resume.herokuapp.com/youtube-rand" target="_blank">
+                                <div class="view overlay zoom">
+                                    <img th:src="@{/resumeImg/portfolio/p3.png}" class="img-fluid " alt="zoom">
+                                    <div class="mask flex-center waves-effect waves-light">
+                                        <p class="title-text">Рандомайзeр (в разработке)</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--  END portfolio  -->
+    <!--  START footer  -->
+    <footer class="footer">
+        <div class="copyright-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copytext">&copy; Copyright 20.02.2020 <a href="mailto:rtootik@gmail.com">V. A.</a></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+<!--  END footer  -->
+<!-- End your project here-->
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/yandex/js/jquery.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/yandex/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/mdb.min.js}"></script>
+<!-- Your custom scripts (optional) -->
+<script>
+        var myVar;
+
+        function load() {
+            myVar = setTimeout(showPage, 500);
+        }
+
+        function showPage() {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("page").style.display = "block";
+        }
+
+    </script>
+
+
+</body>
+
+</html>

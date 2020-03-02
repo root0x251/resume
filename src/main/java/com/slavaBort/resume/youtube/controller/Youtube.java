@@ -23,7 +23,7 @@ import java.util.Random;
  */
 
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/youtube-rand", "/youtube-rand/"})
 public class Youtube extends CustomRequest {
 
     @Value("${api.key.youtube}")
@@ -44,7 +44,7 @@ public class Youtube extends CustomRequest {
     private int randNumber;
 
 
-    @GetMapping("/")
+    @GetMapping
     public String youtubeGetRandComment(YoutubeModel youtubeModel, Model model) {
 
 
@@ -52,7 +52,7 @@ public class Youtube extends CustomRequest {
         return "youtube/index";
     }
 
-    @PostMapping("/")
+    @PostMapping
     public String informationAboutVideo(@ModelAttribute YoutubeModel youtubeModel, Model model) {
         String url = youtubeModel.getVideoURL();
         if (!url.equals("")) {
