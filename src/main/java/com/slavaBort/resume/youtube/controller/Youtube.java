@@ -92,34 +92,106 @@ public class Youtube extends CustomRequest {
     }
 
     private void searchForAComment() {
-        long n = new Random().nextInt(randNumber) + 1;
-        int result = 0;
+        // random comment ID
+        randNumber = new Random().nextInt(randNumber) + 1;
+        System.out.println("randNumber " + randNumber);
 
-        System.out.println(n);
+        // counter
+        int counter = 0;
+        // temp counter
+        int counterTmp = 0;
 
         requestMap.put("key", youtubeApiKey);
         requestMap.put("part", "snippet");
-        requestMap.put("order", "relevance");
         requestMap.put("videoId", videoID);
+        requestMap.put("maxResults", "100");
         requestMap.put("nextPageToken", "");
 
         String jsonString = customGetRequest(urlThreadComments, requestMap).toString();
 
         YoutubeMappingComments youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
 
+        // clear request map
+        requestMap.clear();
+
+        System.out.println("counter " + counter);
+
+
+
         for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
-            System.out.println("id  " + items.getId());
 
-            System.out.println("top lvl comment " + items.getSnippetOne().getTopLevelComment());
+            if (items.getSnippetOne().getTotalReplyCount() > 0) {
+                if (counter < randNumber) {
+                    counter+= items.getSnippetOne().getTotalReplyCount();
+                }
+            }
 
-            System.out.println("name " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName());
-            System.out.println("text " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal());
-
-            System.out.println("============");
-            System.out.println("============");
-            System.out.println("============");
-            System.out.println("============");
         }
+
+
+//        requestMap.put("key", youtubeApiKey);
+//        requestMap.put("part", "snippet");
+//        requestMap.put("order", "relevance");
+//        requestMap.put("videoId", videoID);
+//        requestMap.put("maxResults", "100");
+//        requestMap.put("nextPageToken", "");
+//
+//        String jsonString = customGetRequest(urlThreadComments, requestMap).toString();
+//
+//        YoutubeMappingComments youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
+//
+//        // clear request map
+//        requestMap.clear();
+
+//        for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
+//            counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
+//
+//            do {
+//                requestMap.put("key", youtubeApiKey);
+//                requestMap.put("part", "snippet");
+//                requestMap.put("order", "relevance");
+//                requestMap.put("videoId", videoID);
+//                requestMap.put("maxResults", "100");
+//                requestMap.put("nextPageToken", youtubeMappingComments.getNextPageToken());
+//
+//                youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
+//                counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
+//                // clear request map
+//                requestMap.clear();
+//
+//                if (items.getSnippetOne().getTotalReplyCount() > 0) {
+//                    requestMap.put("key", youtubeApiKey);
+//                    requestMap.put("part", "snippet");
+//                    requestMap.put("order", "relevance");
+//                    requestMap.put("parentId", items.getId());
+//                    requestMap.put("maxResults", "100");
+//                    requestMap.put("nextPageToken", youtubeMappingComments.getNextPageToken());
+//
+//                    youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
+//                    counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
+//                    // clear request map
+//                    requestMap.clear();
+//                }
+//
+//            } while (counter > randNumber);
+//
+//
+//            if (items.getSnippetOne().getTotalReplyCount() != 0) {
+//
+//            }
+//
+//            System.out.println("id  " + items.getId());
+//
+////            System.out.println("top lvl comment " + items.getSnippetOne().getTopLevelComment());
+//
+//            System.out.println("name " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName());
+//            System.out.println("text " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal());
+//
+//            System.out.println("============");
+//            System.out.println("============");
+//            System.out.println("============");
+//            System.out.println("============");
+//        }
 
 
     }

@@ -24,7 +24,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping("/translator-ya/")
+@RequestMapping({"/", "/translator-ya", "/translator-ya/"})
 public class Translator extends CustomRequest {
 
     @Value("${api.key.yandex}")
@@ -52,7 +52,8 @@ public class Translator extends CustomRequest {
 //        dictionaryWithLanguages.put("ru3", "Русский3");
 //    }
 
-    @GetMapping("/")
+//    @GetMapping("/")
+    @GetMapping
     public String langDictionary(TranslatorModel translatorModel, Model model) {
 
         // checking the language dictionary
@@ -77,7 +78,8 @@ public class Translator extends CustomRequest {
         return "ya/index";
     }
 
-    @PostMapping("/")
+//    @PostMapping("/")
+    @PostMapping
     public String translate(@ModelAttribute TranslatorModel translatorModel, Model model) {
 
         String translateText = translatorModel.getInputText();
