@@ -24,7 +24,7 @@ import java.util.Map;
  */
 
 @Controller
-@RequestMapping({"/", "/translator-ya", "/translator-ya/"})
+@RequestMapping({"/translator-ya", "/translator-ya/"})
 public class Translator extends CustomRequest {
 
     @Value("${api.key.yandex}")
