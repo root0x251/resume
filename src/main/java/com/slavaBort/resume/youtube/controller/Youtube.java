@@ -23,7 +23,7 @@ import java.util.Random;
  */
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/youtube/")
 public class Youtube extends CustomRequest {
 
     @Value("${api.key.youtube}")
