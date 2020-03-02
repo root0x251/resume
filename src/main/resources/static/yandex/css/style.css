@@ -1,0 +1,206 @@
+body {
+/*font-size: 12px;*/
+}
+.container {
+    width: 90%;
+}
+
+/*START nav bar */
+/*header bg color*/
+.info-color {
+    background-color: #243a51 !important;
+}
+
+/* END nav bar */
+
+.col-md-1,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-10,
+.col-md-11,
+.col-md-12 {
+/*    border: 1px solid #ccc !important;*/
+    margin: 1em 0;
+}
+
+.mt-5,
+.my-5 {
+/*    margin-top: 4rem !important;*/
+/*    margin-bottom: 0 !important;*/
+    padding: 2rem 0 !important;
+}
+
+
+
+/* START select */
+.custom-select {
+    padding: .3rem;
+}
+/* END select */
+/* START dropdown */
+
+.ui.dropdown:not(.button) > .default.text,
+.ui.default.dropdown:not(.button) > .text {
+    color: rgba(146, 146, 146, 0.87);
+}
+
+.ui.selection.dropdown {
+    border: none;
+    min-width: 8em;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    text-align: center;
+    padding: 1em;
+}
+
+.ui.selection.dropdown .menu {
+    border-radius: 0;
+}
+
+.ui.dropdown .menu {
+    border: none;
+}
+
+.ui.selection.active.dropdown .menu {
+    border-color: #cdcdcd !important;
+}
+
+.ui.selection.active.dropdown:hover,
+.ui.selection.dropdown:focus {
+    border-color: #737373;
+}
+
+.ui.selection.active.dropdown:focus .menu {
+    border-color: #cdcdcd;
+}
+
+table {
+    cursor: pointer;
+    overflow-wrap: break-word;
+    border: .5px solid #ccc;
+}
+
+td:hover {
+    background-color: #d0d0d0;
+}
+
+.ui.selection.dropdown .menu {
+    width: auto;
+}
+
+.ui.dropdown .lang-from {
+    right: 0;
+    left: initial;
+}
+
+.ui.dropdown .lang-to {
+    left: 0;
+}
+
+/* START texarea */
+/*textarea border color*/
+textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 2px solid #5c89b7 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/*textarea label color onfocus*/
+.md-form input:not([type]):focus:not([readonly]) + label,
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="url"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="time"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="date"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="datetime"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="datetime-local"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="tel"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="number"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="search"]:not(.browser-default):focus:not([readonly]) + label,
+.md-form input[type="search-md"]:focus:not([readonly]) + label,
+.md-form textarea.md-textarea:focus:not([readonly]) + label {
+    color: #5c89b7;
+}
+
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+
+.md-form textarea.md-textarea {
+    padding: 0;
+    overflow-y: auto;
+}
+
+.md-form {
+    margin-bottom: 0;
+}
+
+.md-form label.active {
+    transform: translateY(-25px) scale(0.8);
+}
+
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+
+#textarea_feedback {
+    float: right;
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+/* END texarea */
+
+/* START translate button */
+/*button border radius*/
+.btn {
+    border-radius: .7em;
+}
+
+/*button color*/
+.btn-outline-info {
+    color: #3e648c !important;
+    background-color: transparent !important;
+    border: 2px solid #3e648c !important;
+}
+
+.btn-outline-info:hover,
+.btn-outline-info:focus,
+.btn-outline-info:active,
+.btn-outline-info:active:focus,
+.btn-outline-info.active {
+    color: #7ca0c5 !important;
+    background-color: transparent !important;
+    border-color: #7ca0c5 !important;
+}
+
+.btn-outline-info:not([disabled]):not(.disabled):active,
+.btn-outline-info:not([disabled]):not(.disabled).active,
+.show > .btn-outline-info.dropdown-toggle {
+    border-color: #7ca0c5 !important;
+}
+
+/* END translate button */
+
+/* START footer */
+
+.blue {
+    background-color: #243a51 !important
+}
+
+/* END footer */
+
+
+
+@media only screen and (min-width: 992px) {
+    .ui.selection.dropdown .menu {
+        max-height: 30rem;
+    }
+}

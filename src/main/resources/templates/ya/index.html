@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Переводчик</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/yandex/css/bootstrap.min.css}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" th:href="@{/yandex/css/mdb.min.css}">
+    <!-- Custome style -->
+    <!--    <link rel="stylesheet" th:href="@{css/dropdown.css}">-->
+    <link rel="stylesheet" th:href="@{/yandex/css/style.css}">
+
+
+    <!--    -->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{css/test/normalize.css}" />-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{css/test/demo.css}" />-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{css/test/cs-select.css}" />-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{css/test/cs-skin-boxes.css}" />-->
+    <!--    -->
+
+
+</head>
+<body>
+<!--Main Navigation-->
+<header>
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark info-color fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Translator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+                    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a th:href="@{https://twitter.com/rtootik_}" class="nav-link"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{https://vk.com/id433186932}" class="nav-link"><i class="fab fa-vk"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{https://github.com/root0x251}" class="nav-link"><i class="fab fa-github"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{mailto:rtootik@gmail.com}" class="nav-link"><i class="fab fa-google"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{https://t-do.ru/root0x251}" class="nav-link"><i class="fab fa-telegram"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+</header>
+<!--Main Navigation-->
+<!--Main Layout-->
+<main class="text-center my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <!-- START select lang from-->
+                            <div class="col-md-6">
+                                <select class="browser-default custom-select"
+                                        th:field="*{translatorModel.selectedLanguageTranslateFrom}"
+                                        form="translateForm">
+                                    <option selected value="">Авто</option>
+                                    <option th:each="entry : ${dictionaryWithLanguages.entrySet()}"
+                                            th:value="${entry.key}"
+                                            th:utext="${entry.value}">
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- END select lang from-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- START textarea -->
+                                <div class="md-form">
+                                    <form action="#" th:action="@{/ya/}" th:object="${translateForm}" method="post"
+                                          id="translateForm">
+                                        <textarea id="translateTextarea" class="md-textarea form-control" rows="8"
+                                                  maxlength="1000" onkeyup="this.value = this.value.replace('\n', '');"
+                                                  th:field="*{inputText}"></textarea>
+                                        <label for="translateTextarea">Input text</label>
+                                    </form>
+                                </div>
+                                <div id="textarea_feedback"></div>
+                                <!-- END textarea -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <!-- START selector lang to -->
+                            <div class="col-md-6">
+                                <select class="browser-default custom-select"
+                                        th:field="*{translatorModel.selectedLanguageTranslateTo}" form="translateForm">
+                                    <option selected value="ru">Русский</option>
+                                    <option th:each="entry : ${dictionaryWithLanguages.entrySet()}"
+                                            th:value="${entry.key}"
+                                            th:utext="${entry.value}">
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- END selector lang to -->
+                            <div class="col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form">
+                                    <textarea readonly id="textarea" class="md-textarea form-control" rows="8"
+                                              form="translateForm"
+                                              th:field="*{translatorModel.translateText}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-outline-info waves-effect" onClick="clearTextarea();">
+                            Clear
+                        </button>
+                        <button type="submit" class="btn btn-outline-info waves-effect" oncClick="translateText"
+                                form="translateForm">Translate
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- START Footer -->
+<footer class="page-footer font-small blue fixed-bottom">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020
+        <a th:href="@{mailto:rtootik@gmail.com}"> Вячеслав Алексеевич </a>
+    </div>
+    <!-- Copyright -->
+</footer>
+<!-- END Footer -->
+<!-- End Project -->
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/yandex/js/jquery.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/yandex/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/mdb.min.js}"></script>
+
+
+<!-- Your custom scripts (optional) -->
+<!--    <script th:src="@{js/semantic.js}"></script>-->
+
+<!-- START dropdown menu script -->
+<script>
+        $(document)
+            .ready(function() {
+                $('.ui.selection.dropdown').dropdown();
+                $('.ui.menu .ui.dropdown').dropdown({
+                    on: 'hover'
+                });
+            });
+
+
+</script>
+<!-- END dropdown menu script -->
+
+<!-- START textarea resize script -->
+<script>
+        var autoExpand = function(field) {
+            // Reset field height
+            field.style.height = 'inherit';
+            // Get the computed styles for the element
+            var computed = window.getComputedStyle(field);
+            // Calculate the height
+            var height = parseInt(computed.getPropertyValue('border-top-width'), 10) +
+                parseInt(computed.getPropertyValue('padding-top'), 10) +
+                field.scrollHeight +
+                parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+                parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+            if (height < 300) {
+                field.style.height = height + 'px';
+            } else {
+                field.style.height = 300 + 'px';
+                return;
+            }
+        };
+        document.addEventListener('input', function(event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea') return;
+            autoExpand(event.target);
+        }, false);
+
+</script>
+<!-- END textarea resize script -->
+<!-- START textarea script (count char)-->
+<script>
+        $(document).ready(function() {
+            var text_max = 1000;
+            $('#textarea_feedback').html(text_max + '/' + text_max);
+
+            $('#translateTextarea').keyup(function() {
+                var text_length = $('#translateTextarea').val().length;
+                var text_remaining = text_max - text_length;
+
+                $('#textarea_feedback').html(text_remaining + '/' + text_max);
+            });
+        });
+
+
+</script>
+<!-- END textarea script (count char)-->
+<!-- START Clear Textarea -->
+<script>
+        function clearTextarea() {
+            document.getElementById('translateTextarea').value = "";
+        };
+
+</script>
+<!-- END Clear Textarea -->
+
+
+<!--    <script th:src="@{js/test/classie.js}"></script>-->
+<!--    <script th:src="@{js/test/selectFx.js}"></script>-->
+<!--    <script>-->
+<!--			(function() {-->
+<!--				[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {-->
+<!--					new SelectFx(el, {-->
+<!--						stickyPlaceholder: false,-->
+<!--						onChange: function(val){-->
+<!--							document.querySelector('span.cs-placeholder').style.backgroundColor = val;-->
+<!--						}-->
+<!--					});-->
+<!--				} );-->
+<!--			})();-->
+<!--		</script>-->
+
+
+</body>
+
+</html>

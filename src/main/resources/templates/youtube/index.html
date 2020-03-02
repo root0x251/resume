@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<p>
+<h1>Form</h1>
+
+
+<form action="#" th:action="@{/}" th:object="${youtubeInputForm}" method="post">
+    <p>url: <input type="text" th:field="*{videoURL}"/></p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+
+<h1>Result</h1>
+<p th:text="'Количество просмотров: ' + ${youtubeModel.viewCount}"/>
+<p th:text="'Количество комментариев: ' + ${youtubeModel.commentCount}"/>
+
+
+
+<p th:text="'Количество лайков: ' + ${youtubeModel.likeCount}"/>
+<p th:text="'Количество дизлайков: ' + ${youtubeModel.dislikeCount}"/>
+
+
+</body>
+</html>
