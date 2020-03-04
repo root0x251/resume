@@ -25,7 +25,7 @@
 <h1>Form</h1>
 
 
-<form action="#" th:action="@{/}" th:object="${youtubeInputForm}" method="post">
+<form action="#" th:action="@{/youtube-rand}" th:object="${youtubeInputForm}" method="post">
     <p>url: <input type="text" th:field="*{videoURL}"/></p>
     <p><input type="submit" value="Submit" /></p>
 </form>
@@ -35,10 +35,17 @@
 <p th:text="'Количество просмотров: ' + ${youtubeModel.viewCount}"/>
 <p th:text="'Количество комментариев: ' + ${youtubeModel.commentCount}"/>
 
-
-
 <p th:text="'Количество лайков: ' + ${youtubeModel.likeCount}"/>
 <p th:text="'Количество дизлайков: ' + ${youtubeModel.dislikeCount}"/>
+
+
+<h1>Message</h1>
+<p th:text="'Имя: ' + ${youtubeModel.name}"/>
+<p th:text="'Сообщение: ' + ${youtubeModel.message}"/>
+<p th:text="'Rand: ' + ${youtubeModel.randNumber}"/>
+<p th:text="'Counter: ' + ${youtubeModel.counter}"/>
+
+
 
 
 </body>

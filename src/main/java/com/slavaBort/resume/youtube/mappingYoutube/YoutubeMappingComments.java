@@ -1,4 +1,4 @@
-package com.slavaBort.resume.youtube.mappingYoutube.mapingVideoStatistic;
+package com.slavaBort.resume.youtube.mappingYoutube;
 
 import com.google.gson.annotations.SerializedName;
 

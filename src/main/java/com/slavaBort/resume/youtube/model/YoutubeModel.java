@@ -17,6 +17,16 @@ public class YoutubeModel {
 
     private int commentCount;
 
+
+
+    private String name;
+    private String message;
+
+    private int counter;
+    private int randNumber;
+
+
+
     public YoutubeModel() {
     }
 
@@ -58,5 +68,37 @@ public class YoutubeModel {
 
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public int getRandNumber() {
+        return randNumber;
+    }
+
+    public void setRandNumber(int randNumber) {
+        this.randNumber = randNumber;
     }
 }

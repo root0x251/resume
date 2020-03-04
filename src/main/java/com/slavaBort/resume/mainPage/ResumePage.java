@@ -13,7 +13,7 @@ public class ResumePage {
 
     @GetMapping("/")
     public String startPage() {
-        System.out.println(1);
+
         return "resume/index";
     }
 

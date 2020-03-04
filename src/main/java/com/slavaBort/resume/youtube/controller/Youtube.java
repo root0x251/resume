@@ -2,8 +2,9 @@ package com.slavaBort.resume.youtube.controller;
 
 import com.google.gson.Gson;
 import com.slavaBort.resume.customRequest.CustomRequest;
-import com.slavaBort.resume.youtube.mappingYoutube.mapingVideoStatistic.YoutubeMappingComments;
-import com.slavaBort.resume.youtube.mappingYoutube.mapingVideoStatistic.YoutubeMappingVideoStatistic;
+import com.slavaBort.resume.youtube.mappingYoutube.YoutubeMappingComments;
+import com.slavaBort.resume.youtube.mappingYoutube.YoutubeMappingNestedComments;
+import com.slavaBort.resume.youtube.mappingYoutube.YoutubeMappingVideoStatistic;
 import com.slavaBort.resume.youtube.model.YoutubeModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -42,12 +43,14 @@ public class Youtube extends CustomRequest {
 
     private String videoID;
     private int randNumber;
+    private int counter = 0;
+
+    private String name;
+    private String message;
 
 
     @GetMapping
     public String youtubeGetRandComment(YoutubeModel youtubeModel, Model model) {
-
-
         model.addAttribute("youtubeInputForm", youtubeModel);
         return "youtube/index";
     }
@@ -56,33 +59,41 @@ public class Youtube extends CustomRequest {
     public String informationAboutVideo(@ModelAttribute YoutubeModel youtubeModel, Model model) {
         String url = youtubeModel.getVideoURL();
         if (!url.equals("")) {
-            videoID = url.substring(url.indexOf("=") + 1);
-            if (!videoID.contains("&")) {
-                // ok
-                // get video statistic
-                requestMap.put("key", youtubeApiKey);
-                requestMap.put("part", "statistics");
-                requestMap.put("id", videoID);
-                String jsonString = customGetRequest(urlVideoStatistic, requestMap).toString();
-                YoutubeMappingVideoStatistic videoStatistic = new Gson().fromJson(jsonString, YoutubeMappingVideoStatistic.class);
+            try {
+                videoID = url.substring(url.indexOf("=") + 1);
+                if (!videoID.contains("&")) {
+                    // get video statistic
+                    requestMap.put("key", youtubeApiKey);
+                    requestMap.put("part", "statistics");
+                    requestMap.put("id", videoID);
+                    String jsonString = customGetRequest(urlVideoStatistic, requestMap).toString();
+                    YoutubeMappingVideoStatistic videoStatistic = new Gson().fromJson(jsonString, YoutubeMappingVideoStatistic.class);
 
-                youtubeModel.setViewCount(videoStatistic.getItemsList().get(0).getStatistics().getViewCount());
-                youtubeModel.setCommentCount(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
-                youtubeModel.setLikeCount(videoStatistic.getItemsList().get(0).getStatistics().getLikeCount());
-                youtubeModel.setDislikeCount(videoStatistic.getItemsList().get(0).getStatistics().getDislikeCount());
+                    youtubeModel.setViewCount(videoStatistic.getItemsList().get(0).getStatistics().getViewCount());
+                    youtubeModel.setCommentCount(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
+                    youtubeModel.setLikeCount(videoStatistic.getItemsList().get(0).getStatistics().getLikeCount());
+                    youtubeModel.setDislikeCount(videoStatistic.getItemsList().get(0).getStatistics().getDislikeCount());
 
-                randNumber = youtubeModel.getCommentCount();
+                    randNumber = youtubeModel.getCommentCount();
 
-                requestMap.clear();
+                    requestMap.clear();
 
-                searchForAComment();
+                    searchForAComment();
 
-            } else {
-                //error
-                System.out.println("ID error");
+                    youtubeModel.setName(name);
+                    youtubeModel.setMessage(message);
+
+                    youtubeModel.setRandNumber(randNumber);
+                    youtubeModel.setCounter(counter);
+                    counter = 0;
+                } else {
+                    //error
+                    System.out.println("ID error");
+                }
+            } catch (IndexOutOfBoundsException ignore) {
+                System.out.println("incorrect link");
             }
         } else {
-            // error
             System.out.println("URL is null");
         }
 
@@ -92,171 +103,92 @@ public class Youtube extends CustomRequest {
     }
 
     private void searchForAComment() {
-        // random comment ID
-        randNumber = new Random().nextInt(randNumber) + 1;
-        System.out.println("randNumber " + randNumber);
+        YoutubeModel youtubeModel = new YoutubeModel();
 
-        // counter
-        int counter = 0;
-        // temp counter
-        int counterTmp = 0;
+        randNumber = new Random().nextInt(randNumber);
 
-        requestMap.put("key", youtubeApiKey);
-        requestMap.put("part", "snippet");
-        requestMap.put("videoId", videoID);
-        requestMap.put("maxResults", "100");
-        requestMap.put("nextPageToken", "");
+        // comment
+        YoutubeMappingComments youtubeMappingComments = new YoutubeMappingComments();
 
-        String jsonString = customGetRequest(urlThreadComments, requestMap).toString();
+        // nested comments
+        YoutubeMappingNestedComments youtubeMappingNestedComments = new YoutubeMappingNestedComments();
 
-        YoutubeMappingComments youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
+        Gson gson = new Gson();
 
-        // clear request map
-        requestMap.clear();
+        String jsonString;
 
-        System.out.println("counter " + counter);
+        boolean isFind = false;
 
 
+        try {
 
-        for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
+            do {
+                requestMap.put("key", youtubeApiKey);
+                requestMap.put("part", "snippet");
+                requestMap.put("order", "relevance");
+                requestMap.put("videoId", videoID);
+                requestMap.put("maxResults", "100");
+                requestMap.put("pageToken", youtubeMappingComments.getNextPageToken());
 
-            if (items.getSnippetOne().getTotalReplyCount() > 0) {
-                if (counter < randNumber) {
-                    counter+= items.getSnippetOne().getTotalReplyCount();
+                jsonString = customGetRequest(urlThreadComments, requestMap).toString();
+
+                requestMap.clear();
+
+                youtubeMappingComments = gson.fromJson(jsonString, YoutubeMappingComments.class);
+
+                for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
+                    if (randNumber > counter) {
+                        counter += 1;
+                        if (items.getSnippetOne().getTotalReplyCount() > 0) {
+                            do {
+                                requestMap.put("key", youtubeApiKey);
+                                requestMap.put("part", "snippet");
+                                requestMap.put("order", "relevance");
+                                requestMap.put("parentId", items.getId());
+                                requestMap.put("maxResults", "100");
+                                requestMap.put("pageToken", youtubeMappingNestedComments.getNextPageToken());
+
+                                jsonString = customGetRequest(urlNestedComments, requestMap).toString();
+
+                                requestMap.clear();
+
+                                youtubeMappingNestedComments = new Gson().fromJson(jsonString, YoutubeMappingNestedComments.class);
+
+                                for (YoutubeMappingNestedComments.Items items1 : youtubeMappingNestedComments.getItemsList()) {
+                                    if (randNumber > counter) {
+                                        counter += 1;
+                                    } else {
+                                        // our comment
+                                        if (!isFind) {
+                                            name = items1.getSnippet().getAuthorDisplayName();
+                                            message = items1.getSnippet().getTextOriginal();
+                                            isFind = true;
+                                        }
+                                        break;
+                                    }
+                                }
+                            } while (youtubeMappingNestedComments.getNextPageToken() != null);
+                        }
+                    } else {
+                        // our comment
+                        if (!isFind) {
+                            name = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName();
+                            message = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal();
+                            isFind = true;
+                        }
+                        break;
+                    }
                 }
-            }
-
+            } while (youtubeMappingComments.getNextPageToken() != null);
+        } catch (NullPointerException ignore) {
+            System.out.println("error null");
         }
 
-
-//        requestMap.put("key", youtubeApiKey);
-//        requestMap.put("part", "snippet");
-//        requestMap.put("order", "relevance");
-//        requestMap.put("videoId", videoID);
-//        requestMap.put("maxResults", "100");
-//        requestMap.put("nextPageToken", "");
-//
-//        String jsonString = customGetRequest(urlThreadComments, requestMap).toString();
-//
-//        YoutubeMappingComments youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
-//
-//        // clear request map
-//        requestMap.clear();
-
-//        for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
-//            counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
-//
-//            do {
-//                requestMap.put("key", youtubeApiKey);
-//                requestMap.put("part", "snippet");
-//                requestMap.put("order", "relevance");
-//                requestMap.put("videoId", videoID);
-//                requestMap.put("maxResults", "100");
-//                requestMap.put("nextPageToken", youtubeMappingComments.getNextPageToken());
-//
-//                youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
-//                counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
-//                // clear request map
-//                requestMap.clear();
-//
-//                if (items.getSnippetOne().getTotalReplyCount() > 0) {
-//                    requestMap.put("key", youtubeApiKey);
-//                    requestMap.put("part", "snippet");
-//                    requestMap.put("order", "relevance");
-//                    requestMap.put("parentId", items.getId());
-//                    requestMap.put("maxResults", "100");
-//                    requestMap.put("nextPageToken", youtubeMappingComments.getNextPageToken());
-//
-//                    youtubeMappingComments = new Gson().fromJson(jsonString, YoutubeMappingComments.class);
-//                    counter += youtubeMappingComments.getPageInfo().getResultsPerPage();
-//                    // clear request map
-//                    requestMap.clear();
-//                }
-//
-//            } while (counter > randNumber);
-//
-//
-//            if (items.getSnippetOne().getTotalReplyCount() != 0) {
-//
-//            }
-//
-//            System.out.println("id  " + items.getId());
-//
-////            System.out.println("top lvl comment " + items.getSnippetOne().getTopLevelComment());
-//
-//            System.out.println("name " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName());
-//            System.out.println("text " + items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal());
-//
-//            System.out.println("============");
-//            System.out.println("============");
-//            System.out.println("============");
-//            System.out.println("============");
-//        }
-
+        System.out.println("randNumber   " + randNumber);
+        System.out.println("counter    " + counter);
+        System.out.println(name);
+        System.out.println(message);
 
     }
-
-//    @GetMapping("/")
-//    public String getCountComments() {
-//
-//        YoutubeMappingVideoInfo youtubeMappingVideoInfo;
-//        Gson gson = new Gson();
-//
-//        String url = "https://www.googleapis.com/youtube/v3/videos";
-//        Map<String, String> requestMap = new HashMap<>();
-//        requestMap.put("key", "AIzaSyBs-WHv4h3uIuUDwkY5dW59hrk54QBjCrM");
-//        requestMap.put("id", "9bZkp7q19f0");
-//        requestMap.put("part", "statistics");
-//
-//        String jsonString = customGetRequest(url, requestMap).toString();
-//        youtubeMappingVideoInfo = gson.fromJson(jsonString, YoutubeMappingVideoInfo.class);
-//
-//
-//        System.out.println(youtubeMappingVideoInfo.getItemsList().get(0).getStatistics().getCommentCount());
-//
-//
-//        return "youtube/index";
-//    }
-//
-//    @GetMapping("/w")
-//    public String getRandComment() {
-//
-//
-//        YoutubeMapper youtubeMapper = new YoutubeMapper();
-//        Gson gson = new Gson();
-//
-//        String url = "https://www.googleapis.com/youtube/v3/commentThreads";
-//        Map<String, String> requestMap = new HashMap<>();
-//        requestMap.put("key", "AIzaSyBs-WHv4h3uIuUDwkY5dW59hrk54QBjCrM");
-//        requestMap.put("videoId", "dJP7lu9gXjc");
-//        requestMap.put("part", "snippet");
-//        requestMap.put("maxResults", "100");
-//        requestMap.put("pageToken", "");
-//
-//
-//        do {
-//            String jsonString = customGetRequest(url, requestMap).toString();
-//            youtubeMapper = gson.fromJson(jsonString, YoutubeMapper.class);
-//            requestMap.replace("pageToken", youtubeMapper.getNextPageToken());
-//            countComment += youtubeMapper.getPageInfo().getTotalResults();
-//            System.out.println(countComment);
-//
-//
-//        } while (youtubeMapper.getNextPageToken() != null);
-
-
-//        String jsonString = customGetRequest(url, requestMap).toString();
-//        YoutubeMapper youtubeMapper = new Gson().fromJson(jsonString, YoutubeMapper.class);
-//        String oldPageToken = youtubeMapper.getNextPageToken();
-//        do {
-//            countComment += youtubeMapper.getPageInfo().getTotalResults();
-//            requestMap.replace("pageToken", oldPageToken, youtubeMapper.getNextPageToken());
-//            oldPageToken = youtubeMapper.getNextPageToken();
-//            jsonString = customGetRequest(url, requestMap).toString();
-//            youtubeMapper = new Gson().fromJson(jsonString, YoutubeMapper.class);
-//            System.out.println(youtubeMapper.getItemsList().size());
-//        } while (!oldPageToken.equals(""));
-//        return "youtube";
-//    }
 
 }

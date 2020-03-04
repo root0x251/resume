@@ -45,14 +45,6 @@ public class Translator extends CustomRequest {
     public Translator() {
     }
 
-//    {
-//        dictionaryWithLanguages.put("ru", "Русский");
-//        dictionaryWithLanguages.put("ru1", "Русский1");
-//        dictionaryWithLanguages.put("ru2", "Русский2");
-//        dictionaryWithLanguages.put("ru3", "Русский3");
-//    }
-
-//    @GetMapping("/")
     @GetMapping
     public String langDictionary(TranslatorModel translatorModel, Model model) {
 
@@ -78,7 +70,6 @@ public class Translator extends CustomRequest {
         return "ya/index";
     }
 
-//    @PostMapping("/")
     @PostMapping
     public String translate(@ModelAttribute TranslatorModel translatorModel, Model model) {
 
