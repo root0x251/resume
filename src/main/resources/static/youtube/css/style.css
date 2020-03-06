@@ -1,0 +1,152 @@
+:root {
+    --youtube-color: rgba(255, 0, 0, 1);
+    --youtube-color-close: rgba(255, 0, 0, 0.5);
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+/* START header */
+
+.black {
+    background-color: rgba(0, 0, 0, 0.0) !important;
+    box-shadow: none;
+}
+
+/* END header */
+
+.fa-youtube {
+    color: var(--youtube-color);
+}
+
+.view {
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (51).jpg")no-repeat center center;
+
+    /*    background: url("../video/video.mp4")no-repeat center center;*/
+
+    background-size: cover;
+}
+
+
+.rgba-black-strong,
+.rgba-black-strong:after {
+    background-color: rgba(40, 40, 40, 0.7);
+    background-image: url(../img/overlays/01.png)
+}
+
+
+@media (min-width: 768px) {
+    .view {
+        overflow: visible;
+        margin-top: -56px;
+    }
+}
+
+.navbar {
+    z-index: 1;
+}
+
+html,
+body,
+header,
+.view {
+    height: 100%;
+}
+
+.white-text h2 {
+    padding-bottom: 3rem;
+}
+
+/*START input form*/
+
+.form-control {
+    background-color: rgba(204, 204, 204, 0.4);
+    border: none;
+    color: var(--youtube-color);
+}
+
+.md-form label {
+    color: var(--youtube-color);
+}
+
+
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid var(--youtube-color);
+    box-shadow: 0 1px 0 0 var(--youtube-color);
+    color: var(--youtube-color);
+}
+
+
+.md-form input[type="text"]:not(.browser-default):disabled:not([readonly]) {
+    border-bottom: 1px solid var(--youtube-color);
+    box-shadow: 0 1px 0 0 var(--youtube-color);
+    color: var(--youtube-color);
+}
+
+
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly]) + label {
+    color: var(--youtube-color);
+    font-weight: 600;
+}
+
+.md-form input:not([type]),
+.md-form input[type="text"]:not(.browser-default),
+.md-form input[type="password"]:not(.browser-default),
+.md-form input[type="email"]:not(.browser-default),
+.md-form input[type="url"]:not(.browser-default),
+.md-form input[type="time"]:not(.browser-default),
+.md-form input[type="date"]:not(.browser-default),
+.md-form input[type="datetime"]:not(.browser-default),
+.md-form input[type="datetime-local"]:not(.browser-default),
+.md-form input[type="tel"]:not(.browser-default),
+.md-form input[type="number"]:not(.browser-default),
+.md-form input[type="search"]:not(.browser-default),
+.md-form input[type="phone"]:not(.browser-default),
+.md-form input[type="search-md"],
+.md-form textarea.md-textarea {
+    border-bottom: 1px solid var(--youtube-color);
+}
+
+.url-form {
+    padding-bottom: 5%;
+}
+
+/* END  input form*/
+
+.container .white-text {
+    margin-top: -15%;
+}
+
+.view h5 {
+    font-size: 0.8em;
+    text-align: center
+}
+
+
+/*START modal*/
+.modal-dialog.cascading-modal.modal-avatar {
+    /*    margin-top: 15%;*/
+}
+
+.modal-dialog.cascading-modal.modal-avatar .modal-header {
+    margin-top: -5rem;
+}
+
+.modal-dialog.cascading-modal.modal-avatar .modal-header img {
+    width: 100px;
+}
+
+.modal-body .btn-outline-danger {
+    border-color: var(--youtube-color-close) !important;
+}
+
+
+@media (min-width: 576px) {
+    .modal-sm {
+        max-width: 350px;
+    }
+}
+
+/*END modal*/

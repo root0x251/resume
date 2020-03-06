@@ -47,6 +47,7 @@ public class Youtube extends CustomRequest {
 
     private String name;
     private String message;
+    private String avatar;
 
 
     @GetMapping
@@ -82,16 +83,19 @@ public class Youtube extends CustomRequest {
 
                     youtubeModel.setName(name);
                     youtubeModel.setMessage(message);
+                    youtubeModel.setAvatar(avatar);
 
                     youtubeModel.setRandNumber(randNumber);
                     youtubeModel.setCounter(counter);
+
                     counter = 0;
                 } else {
                     //error
                     System.out.println("ID error");
                 }
-            } catch (IndexOutOfBoundsException ignore) {
+            } catch (IndexOutOfBoundsException | NullPointerException ignore) {
                 System.out.println("incorrect link");
+                System.out.println("or quot");
             }
         } else {
             System.out.println("URL is null");
@@ -103,8 +107,6 @@ public class Youtube extends CustomRequest {
     }
 
     private void searchForAComment() {
-        YoutubeModel youtubeModel = new YoutubeModel();
-
         randNumber = new Random().nextInt(randNumber);
 
         // comment
@@ -117,77 +119,109 @@ public class Youtube extends CustomRequest {
 
         String jsonString;
 
+        // temp counter
+        int tempCounter;
+
         boolean isFind = false;
 
-
         try {
-
             do {
-                requestMap.put("key", youtubeApiKey);
-                requestMap.put("part", "snippet");
-                requestMap.put("order", "relevance");
-                requestMap.put("videoId", videoID);
-                requestMap.put("maxResults", "100");
-                requestMap.put("pageToken", youtubeMappingComments.getNextPageToken());
+                if (!isFind) {
+                    requestMap.put("key", youtubeApiKey);
+                    requestMap.put("part", "snippet");
+                    requestMap.put("order", "relevance");
+                    requestMap.put("videoId", videoID);
+                    requestMap.put("maxResults", "100");
+                    requestMap.put("pageToken", youtubeMappingComments.getNextPageToken());
 
-                jsonString = customGetRequest(urlThreadComments, requestMap).toString();
+                    jsonString = customGetRequest(urlThreadComments, requestMap).toString();
 
-                requestMap.clear();
+                    requestMap.clear();
 
-                youtubeMappingComments = gson.fromJson(jsonString, YoutubeMappingComments.class);
+                    youtubeMappingComments = gson.fromJson(jsonString, YoutubeMappingComments.class);
 
-                for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
-                    if (randNumber > counter) {
-                        counter += 1;
-                        if (items.getSnippetOne().getTotalReplyCount() > 0) {
-                            do {
-                                requestMap.put("key", youtubeApiKey);
-                                requestMap.put("part", "snippet");
-                                requestMap.put("order", "relevance");
-                                requestMap.put("parentId", items.getId());
-                                requestMap.put("maxResults", "100");
-                                requestMap.put("pageToken", youtubeMappingNestedComments.getNextPageToken());
+                    for (YoutubeMappingComments.Items items : youtubeMappingComments.getItemsList()) {
+                        if (randNumber > counter) {
+                            counter += 1;
 
-                                jsonString = customGetRequest(urlNestedComments, requestMap).toString();
+                            tempCounter = counter;
+                            tempCounter += items.getSnippetOne().getTotalReplyCount();
 
-                                requestMap.clear();
+                            if (randNumber > tempCounter) {
+                                counter += items.getSnippetOne().getTotalReplyCount();
+                            } else {
+                                if (items.getSnippetOne().getTotalReplyCount() > 0) {
+                                    try {
+                                        do {
+                                            if (!isFind) {
+                                                requestMap.put("key", youtubeApiKey);
+                                                requestMap.put("part", "snippet");
+                                                requestMap.put("order", "relevance");
+                                                requestMap.put("parentId", items.getId());
+                                                requestMap.put("maxResults", "100");
+                                                requestMap.put("pageToken", youtubeMappingNestedComments.getNextPageToken());
 
-                                youtubeMappingNestedComments = new Gson().fromJson(jsonString, YoutubeMappingNestedComments.class);
+                                                jsonString = customGetRequest(urlNestedComments, requestMap).toString();
 
-                                for (YoutubeMappingNestedComments.Items items1 : youtubeMappingNestedComments.getItemsList()) {
-                                    if (randNumber > counter) {
-                                        counter += 1;
-                                    } else {
-                                        // our comment
-                                        if (!isFind) {
-                                            name = items1.getSnippet().getAuthorDisplayName();
-                                            message = items1.getSnippet().getTextOriginal();
-                                            isFind = true;
-                                        }
-                                        break;
+                                                requestMap.clear();
+
+                                                youtubeMappingNestedComments = new Gson().fromJson(jsonString, YoutubeMappingNestedComments.class);
+
+                                                for (YoutubeMappingNestedComments.Items items1 : youtubeMappingNestedComments.getItemsList()) {
+                                                    if (randNumber > counter) {
+                                                        counter += 1;
+                                                    } else if (randNumber == counter) {
+                                                        // our comment
+                                                        name = items1.getSnippet().getAuthorDisplayName();
+                                                        message = items1.getSnippet().getTextOriginal();
+                                                        avatar = items1.getSnippet().getAuthorProfileImageUrl();
+                                                        isFind = true;
+                                                        break;
+                                                    }
+                                                }
+                                            } else {
+                                                break;
+                                            }
+
+                                            if (youtubeMappingNestedComments.getNextPageToken() == null) {
+                                                break;
+                                            }
+
+                                        } while (true);
+                                    } catch (NullPointerException ignore) {
+                                        System.out.println("error Null pointer nested comments");
                                     }
                                 }
-                            } while (youtubeMappingNestedComments.getNextPageToken() != null);
+                            }
+
+                        } else {
+                            // our comment
+                            if (!isFind) {
+                                name = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName();
+                                message = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal();
+                                avatar = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorProfileImageUrl();
+                                isFind = true;
+                            }
+                            break;
                         }
-                    } else {
-                        // our comment
-                        if (!isFind) {
-                            name = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName();
-                            message = items.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal();
-                            isFind = true;
-                        }
-                        break;
                     }
+                } else {
+                    break;
                 }
-            } while (youtubeMappingComments.getNextPageToken() != null);
+
+                if (youtubeMappingComments.getNextPageToken() == null) {
+                    break;
+                }
+
+            } while (true);
+
         } catch (NullPointerException ignore) {
-            System.out.println("error null");
+            System.out.println("error Null pointer comment");
         }
 
-        System.out.println("randNumber   " + randNumber);
-        System.out.println("counter    " + counter);
-        System.out.println(name);
-        System.out.println(message);
+//        System.out.println(name);
+//        System.out.println(message);
+//        System.out.println(avatar);
 
     }
 

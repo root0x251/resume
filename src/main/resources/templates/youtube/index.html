@@ -1,11 +1,81 @@
-<!DOCTYPE HTML>
+<!--<!DOCTYPE HTML>-->
+<!--<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">-->
+<!--<head>-->
+<!--    <title>Getting Started: Handling Form Submission</title>-->
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
+
+<!--    &lt;!&ndash; Yandex.Metrika counter &ndash;&gt;-->
+<!--    <script type="text/javascript">-->
+<!--   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};-->
+<!--   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})-->
+<!--   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");-->
+
+<!--   ym(58875604, "init", {-->
+<!--        clickmap:true,-->
+<!--        trackLinks:true,-->
+<!--        accurateTrackBounce:true,-->
+<!--        webvisor:true-->
+<!--   });-->
+
+<!--    </script>-->
+<!--    <noscript>-->
+<!--        <div><img th:src="@{https://mc.yandex.ru/watch/58875604}" style="position:absolute; left:-9999px;" alt=""/>-->
+<!--        </div>-->
+<!--    </noscript>-->
+<!--    &lt;!&ndash; /Yandex.Metrika counter &ndash;&gt;-->
+
+<!--</head>-->
+<!--<p>-->
+<!--<h1>Form</h1>-->
+
+
+<!--<form action="#" th:action="@{/youtube-rand}" th:object="${youtubeInputForm}" method="post">-->
+<!--    <p>url: <input type="text" th:field="*{videoURL}"/></p>-->
+<!--    <p><input type="submit" value="Submit"/></p>-->
+<!--</form>-->
+
+
+<!--<h1>Result</h1>-->
+<!--<p th:text="'Количество просмотров: ' + ${youtubeModel.viewCount}"/>-->
+<!--<p th:text="'Количество комментариев: ' + ${youtubeModel.commentCount}"/>-->
+
+<!--<p th:text="'Количество лайков: ' + ${youtubeModel.likeCount}"/>-->
+<!--<p th:text="'Количество дизлайков: ' + ${youtubeModel.dislikeCount}"/>-->
+
+
+<!--<h1>Message</h1>-->
+<!--<p th:text="'Имя: ' + ${youtubeModel.name}"/>-->
+<!--<p th:text="'Сообщение: ' + ${youtubeModel.message}"/>-->
+<!--<p th:text="'Rand: ' + ${youtubeModel.randNumber}"/>-->
+<!--<p th:text="'Counter: ' + ${youtubeModel.counter}"/>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Рандомайзер для определения победителей конкурсов на YouTube</title>
+    <!-- MDB icon -->
+    <link rel="icon" th:href="@{/youtube/img/mdb-favicon.ico}" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.11.2/css/all.css}">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap}">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/yandex/css/bootstrap.min.css}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" th:href="@{/yandex/css/mdb.min.css}">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" th:href="@{/youtube/css/style.css}">
 
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    <script type="text/javascript">
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
@@ -16,37 +86,179 @@
         accurateTrackBounce:true,
         webvisor:true
    });
-</script>
-    <noscript><div><img th:src="@{https://mc.yandex.ru/watch/58875604}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+
+
+
+
+    </script>
+    <noscript>
+        <div><img th:src="@{https://mc.yandex.ru/watch/58875604}" style="position:absolute; left:-9999px;" alt=""/>
+        </div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
 
 </head>
-<p>
-<h1>Form</h1>
+
+<body>
 
 
-<form action="#" th:action="@{/youtube-rand}" th:object="${youtubeInputForm}" method="post">
-    <p>url: <input type="text" th:field="*{videoURL}"/></p>
-    <p><input type="submit" value="Submit" /></p>
-</form>
+<!--Main Navigation-->
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark black">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fab fa-youtube"></i>
+                <strong>Randomizer</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/youtube-rand}">Главная страница <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/youtube-rand}">Документация</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"><i class="fab fa-instagram"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="view intro-2">
+        <div class="full-bg-img">
+            <div class="mask rgba-black-strong flex-center">
+                <div class="container">
+                    <div class="white-text text-center wow fadeInUp">
+                        <div class="row">
+                            <div class="col">
+                                <h2>Рандомайзер для определения победителей конкурсов на YouTube</h2>
+                            </div>
+                        </div>
+
+                        <div class="row url-form">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4 align-self-center">
+                                <div class="md-form">
+                                    <form action="#" th:action="@{/youtube-rand}" th:object="${youtubeInputForm}"
+                                          method="post" id="urlInputForm">
+                                        <input type="text" id="inputMDEx" class="form-control" th:field="*{videoURL}"/>
+                                        <label for="inputMDEx">Input URL</label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-4 align-self-center">
+
+                                <div class="text-center">
+                                    <input type="submit" form="urlInputForm" class="btn btn-danger btn-rounded"/>
+
+                                    <a type="submit" href="" class="btn btn-danger btn-rounded"
+                                       data-toggle="modal"
+                                       data-target="#modalLoginAvatar">randomize</a>
+                                </div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col"><i class="fas fa-play"></i></div>
+                            <div class="col"><i class="fas fa-smile"></i></div>
+                            <div class="col"><i class="fas fa-angry"></i></div>
+                            <div class="col"><i class="fas fa-comment-dots"></i></div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col">
+                                <h5><p th:text="${youtubeModel.viewCount}"/></h5>
+                            </div>
+                            <div class="col">
+                                <h5><p th:text="${youtubeModel.likeCount}"/></h5>
+                            </div>
+                            <div class="col">
+                                <h5><p th:text="${youtubeModel.dislikeCount}"/></h5>
+                            </div>
+                            <div class="col">
+                                <h5><p th:text="${youtubeModel.commentCount}"/></h5>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+<!--Main Navigation-->
 
 
-<h1>Result</h1>
-<p th:text="'Количество просмотров: ' + ${youtubeModel.viewCount}"/>
-<p th:text="'Количество комментариев: ' + ${youtubeModel.commentCount}"/>
+<!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+        <!--Content-->
+        <div class="modal-content">
 
-<p th:text="'Количество лайков: ' + ${youtubeModel.likeCount}"/>
-<p th:text="'Количество дизлайков: ' + ${youtubeModel.dislikeCount}"/>
+            <!--Header-->
+            <div class="modal-header">
+                <img th:src="@{${youtubeModel.avatar}}" alt="avatar" class="rounded-circle img-responsive">
+            </div>
+            <!--Body-->
+            <div class="modal-body text-center mb-1">
+                <h5 class="mt-1 mb-2"><p th:text="${youtubeModel.name}"/></h5>
 
 
-<h1>Message</h1>
-<p th:text="'Имя: ' + ${youtubeModel.name}"/>
-<p th:text="'Сообщение: ' + ${youtubeModel.message}"/>
-<p th:text="'Rand: ' + ${youtubeModel.randNumber}"/>
-<p th:text="'Counter: ' + ${youtubeModel.counter}"/>
+                <div class="md-form ml-0 mr-0">
+                    <p th:text="${youtubeModel.message}"/>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button data-dismiss="modal" class="btn btn-danger mt-1 test">сохранить</button>
+                    </div>
+                    <!--                        <div class="col"><button onabort="close" class="btn btn-outline-danger waves-effect">закрыть</button></div>-->
+                </div>
 
 
+            </div>
 
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+
+<!-- End your project here-->
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/yandex/js/jquery.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/yandex/js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/yandex/js/mdb.min.js}"></script>
+<!-- Your custom scripts (optional) -->
 
 </body>
+
 </html>
