@@ -23,10 +23,6 @@ public class YoutubeModel {
     private String message;
     private String avatar;
 
-    private int counter;
-    private int randNumber;
-
-
 
     public YoutubeModel() {
     }
@@ -95,19 +91,4 @@ public class YoutubeModel {
         this.avatar = avatar;
     }
 
-    public int getCounter() {
-        return counter;
-    }
-
-    public void setCounter(int counter) {
-        this.counter = counter;
-    }
-
-    public int getRandNumber() {
-        return randNumber;
-    }
-
-    public void setRandNumber(int randNumber) {
-        this.randNumber = randNumber;
-    }
 }
