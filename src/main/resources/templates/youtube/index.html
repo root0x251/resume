@@ -31,6 +31,8 @@
         webvisor:true
    });
 
+
+
     </script>
     <noscript>
         <div><img th:src="@{https://mc.yandex.ru/watch/58875604}" style="position:absolute; left:-9999px;" alt=""/>
@@ -58,22 +60,29 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/youtube-rand}">Главная страница <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/youtube-rand}">Главная страница <span
+                                class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/youtube-rand}">Документация</a>
                     </li>
                 </ul>
 
-                <ul class="navbar-nav nav-flex-icons">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fab fa-facebook-f"></i></a>
+                        <a th:href="@{https://twitter.com/rtootik_}" class="nav-link"><i class="fab fa-twitter"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fab fa-twitter"></i></a>
+                        <a th:href="@{https://vk.com/id433186932}" class="nav-link"><i class="fab fa-vk"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"><i class="fab fa-instagram"></i></a>
+                        <a th:href="@{https://github.com/root0x251}" class="nav-link"><i class="fab fa-github"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{mailto:rtootik@gmail.com}" class="nav-link"><i class="fab fa-google"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{https://t-do.ru/root0x251}" class="nav-link"><i class="fab fa-telegram"></i></a>
                     </li>
                 </ul>
             </div>
@@ -95,23 +104,26 @@
                             <div class="col-md-2"></div>
                             <div class="col-md-4 align-self-center">
                                 <div class="md-form">
-                                    <form action="#" th:action="@{/youtube-rand}" th:object="${youtubeInputForm}"
+                                    <form action="#" th:action="@{/youtube-rand?result}" th:object="${youtubeInputForm}"
                                           method="post" id="urlInputForm">
                                         <input type="text" id="inputMDEx" class="form-control" th:field="*{videoURL}"/>
                                         <label for="inputMDEx">Input URL</label>
                                     </form>
                                 </div>
                             </div>
-<!--                            <div class="col-md-4 align-self-center">-->
-<!--                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar" form="urlInputForm">randomize</button>-->
-<!--                            </div>-->
+                            <!--                            <div class="col-md-4 align-self-center">-->
+                            <!--                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar" form="urlInputForm">randomize</button>-->
+                            <!--                            </div>-->
 
                             <div class="col-md-4 align-self-center">
                                 <button type="submit" class="btn btn-danger" form="urlInputForm">randomize</button>
-                                <button type="" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar">comment</button>
+<!--                                <button type="" class="btn btn-danger" data-toggle="modal"-->
+<!--                                        data-target="#modalLoginAvatar">comment-->
+<!--                                </button>-->
+
+<!--                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar">comment</button>-->
+
                             </div>
-
-
 
 
                             <div class="col-md-2"></div>
@@ -152,7 +164,7 @@
 
 
 <!--Modal: Login with Avatar Form-->
-<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" id="result" tabindex="-1" role="dialog" aria-labelledby="result"
      aria-hidden="true">
     <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
         <!--Content-->
@@ -165,8 +177,6 @@
             <!--Body-->
             <div class="modal-body text-center mb-1">
                 <h5 class="mt-1 mb-2"><p th:text="${youtubeModel.name}"/></h5>
-
-
                 <div class="md-form ml-0 mr-0">
                     <p th:text="${youtubeModel.message}"/>
                 </div>
@@ -199,6 +209,12 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" th:src="@{/yandex/js/mdb.min.js}"></script>
 <!-- Your custom scripts (optional) -->
+
+<script>
+    if (document.location.href.indexOf('result') != -1) {
+        $("#result").modal('show');
+    }
+</script>
 
 </body>
 
