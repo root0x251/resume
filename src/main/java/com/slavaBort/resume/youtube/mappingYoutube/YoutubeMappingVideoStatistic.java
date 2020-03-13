@@ -15,6 +15,45 @@ public class YoutubeMappingVideoStatistic {
     private List<Items> itemsList;
 
     public class Items {
+
+        @SerializedName("snippet")
+        private Snippet snippet;
+
+        public class Snippet {
+
+            @SerializedName("thumbnails")
+            private Thumbnails thumbnails;
+
+            public class Thumbnails {
+
+                @SerializedName("maxres")
+                private Maxres maxres;
+
+                public class Maxres {
+
+                    @SerializedName("url")
+                    private String url;
+
+                    public String getUrl() {
+                        return url;
+                    }
+
+                }
+
+                public Maxres getStandard() {
+                    return maxres;
+                }
+            }
+
+            public Thumbnails getThumbnails() {
+                return thumbnails;
+            }
+        }
+
+        public Snippet getSnippet() {
+            return snippet;
+        }
+
         @SerializedName("statistics")
         private Statistics statistics;
 

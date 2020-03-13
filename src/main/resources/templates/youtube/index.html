@@ -33,6 +33,7 @@
 
 
 
+
     </script>
     <noscript>
         <div><img th:src="@{https://mc.yandex.ru/watch/58875604}" style="position:absolute; left:-9999px;" alt=""/>
@@ -90,6 +91,7 @@
     </nav>
 
     <div class="view intro-2">
+        <img width="100%" height="100%" th:src="${youtubeModel.bgVideoUrlImage}" alt="" style="position:fixed;top:0;left:0;">
         <div class="full-bg-img">
             <div class="mask rgba-black-strong flex-center">
                 <div class="container">
@@ -111,21 +113,9 @@
                                     </form>
                                 </div>
                             </div>
-                            <!--                            <div class="col-md-4 align-self-center">-->
-                            <!--                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar" form="urlInputForm">randomize</button>-->
-                            <!--                            </div>-->
-
                             <div class="col-md-4 align-self-center">
                                 <button type="submit" class="btn btn-danger" form="urlInputForm">randomize</button>
-<!--                                <button type="" class="btn btn-danger" data-toggle="modal"-->
-<!--                                        data-target="#modalLoginAvatar">comment-->
-<!--                                </button>-->
-
-<!--                                <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#modalLoginAvatar">comment</button>-->
-
                             </div>
-
-
                             <div class="col-md-2"></div>
                         </div>
 
@@ -169,25 +159,22 @@
     <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
         <!--Content-->
         <div class="modal-content">
-
             <!--Header-->
             <div class="modal-header">
-                <img th:src="@{${youtubeModel.avatar}}" alt="avatar" class="rounded-circle img-responsive">
+                <img th:src="@{${youtubeModel.avatar}}" alt="avatar" class="rounded-circle img-responsive" />
             </div>
             <!--Body-->
             <div class="modal-body text-center mb-1">
-                <h5 class="mt-1 mb-2"><p th:text="${youtubeModel.name}"/></h5>
+                <h5 class="mt-1 mb-2"><a th:href="${youtubeModel.userLink}"> <p th:text="${youtubeModel.name}"/> </a></h5>
                 <div class="md-form ml-0 mr-0">
                     <p th:text="${youtubeModel.message}"/>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <button data-dismiss="modal" class="btn btn-danger mt-1 test">сохранить</button>
+                        <button data-dismiss="modal" class="btn btn-danger mt-1 test">закрыть</button>
                     </div>
-                    <!--                        <div class="col"><button onabort="close" class="btn btn-outline-danger waves-effect">закрыть</button></div>-->
                 </div>
-
 
             </div>
 
@@ -214,6 +201,7 @@
     if (document.location.href.indexOf('result') != -1) {
         $("#result").modal('show');
     }
+
 </script>
 
 </body>

@@ -17,11 +17,12 @@ public class YoutubeModel {
 
     private int commentCount;
 
-
+    private String bgVideoUrlImage;
 
     private String name;
     private String message;
     private String avatar;
+    private String userLink;
 
 
     public YoutubeModel() {
@@ -67,6 +68,14 @@ public class YoutubeModel {
         this.commentCount = commentCount;
     }
 
+    public String getBgVideoUrlImage() {
+        return bgVideoUrlImage;
+    }
+
+    public void setBgVideoUrlImage(String bgVideoUrlImage) {
+        this.bgVideoUrlImage = bgVideoUrlImage;
+    }
+
     public String getName() {
         return name;
     }
@@ -91,4 +100,11 @@ public class YoutubeModel {
         this.avatar = avatar;
     }
 
+    public String getUserLink() {
+        return userLink;
+    }
+
+    public void setUserLink(String userLink) {
+        this.userLink = userLink;
+    }
 }

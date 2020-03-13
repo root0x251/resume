@@ -43,11 +43,11 @@ public class Youtube extends CustomRequest {
 
     private String videoID;
     private int randNumber;
-    private int counter;
 
     private String name;
     private String message;
     private String avatar;
+    private String userLink;
 
     @GetMapping
     public String youtubeGetRandComment(YoutubeModel youtubeModel, Model model) {
@@ -63,28 +63,33 @@ public class Youtube extends CustomRequest {
                 videoID = url.substring(url.indexOf("=") + 1);
                 if (!videoID.contains("&")) {
                     // get video statistic
-                    requestMap.put("key", youtubeApiKey);
-                    requestMap.put("part", "statistics");
-                    requestMap.put("id", videoID);
-                    String jsonString = customGetRequest(urlVideoStatistic, requestMap).toString();
+                    if (youtubeModel.getViewCount() == 0) {
 
-                    YoutubeMappingVideoStatistic videoStatistic = new Gson().fromJson(jsonString, YoutubeMappingVideoStatistic.class);
+                        requestMap.put("key", youtubeApiKey);
+                        requestMap.put("part", "statistics,snippet");
+                        requestMap.put("id", videoID);
+                        String jsonString = customGetRequest(urlVideoStatistic, requestMap).toString();
 
-                    youtubeModel.setViewCount(videoStatistic.getItemsList().get(0).getStatistics().getViewCount());
-                    youtubeModel.setCommentCount(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
-                    youtubeModel.setLikeCount(videoStatistic.getItemsList().get(0).getStatistics().getLikeCount());
-                    youtubeModel.setDislikeCount(videoStatistic.getItemsList().get(0).getStatistics().getDislikeCount());
+                        YoutubeMappingVideoStatistic videoStatistic = new Gson().fromJson(jsonString, YoutubeMappingVideoStatistic.class);
 
-                    randNumber = new Random().nextInt(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
+                        youtubeModel.setViewCount(videoStatistic.getItemsList().get(0).getStatistics().getViewCount());
+                        youtubeModel.setCommentCount(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
+                        youtubeModel.setLikeCount(videoStatistic.getItemsList().get(0).getStatistics().getLikeCount());
+                        youtubeModel.setDislikeCount(videoStatistic.getItemsList().get(0).getStatistics().getDislikeCount());
 
-                    requestMap.clear();
+                        youtubeModel.setBgVideoUrlImage(videoStatistic.getItemsList().get(0).getSnippet().getThumbnails().getStandard().getUrl());
+
+                        randNumber = new Random().nextInt(videoStatistic.getItemsList().get(0).getStatistics().getCommentCount());
+
+                        requestMap.clear();
+
+                    }
 
                     searchForAComment();
-
                     youtubeModel.setName(name);
                     youtubeModel.setMessage(message);
                     youtubeModel.setAvatar(avatar);
-
+                    youtubeModel.setUserLink(userLink);
 
                 } else {
                     //error
@@ -92,6 +97,7 @@ public class Youtube extends CustomRequest {
                 }
             } catch (IndexOutOfBoundsException | NullPointerException ignore) {
                 System.out.println("incorrect link");
+                System.out.println("the quota limits");
             }
         } else {
             System.out.println("URL is null");
@@ -99,15 +105,12 @@ public class Youtube extends CustomRequest {
 
         model.addAttribute("youtubeInputForm", youtubeModel);
 
-        System.out.println("///// endd //////");
-
         return "youtube/index";
     }
 
 
     private void searchForAComment() {
-        YoutubeModel youtubeModel = new YoutubeModel();
-        counter = 0;
+        int counter = 0;
 
         // comment
         YoutubeMappingComments youtubeMappingComments = new YoutubeMappingComments();
@@ -172,6 +175,7 @@ public class Youtube extends CustomRequest {
                                                 name = nestedCommens.getSnippet().getAuthorDisplayName();
                                                 message = nestedCommens.getSnippet().getTextOriginal();
                                                 avatar = nestedCommens.getSnippet().getAuthorProfileImageUrl();
+                                                userLink = nestedCommens.getSnippet().getAuthorChannelUrl();
                                                 isFind = true;
                                                 break;
                                             }
@@ -193,6 +197,7 @@ public class Youtube extends CustomRequest {
                             name = comment.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorDisplayName();
                             message = comment.getSnippetOne().getTopLevelComment().getSnippetTwo().getTextOriginal();
                             avatar = comment.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorProfileImageUrl();
+                            userLink = comment.getSnippetOne().getTopLevelComment().getSnippetTwo().getAuthorChannelUrl();
                             isFind = true;
                         }
                         break;
@@ -204,19 +209,6 @@ public class Youtube extends CustomRequest {
             System.out.println("error Null pointer comment");
             e.printStackTrace();
         }
-
-        System.out.println(counter);
-        System.out.println(name);
-        System.out.println(message);
-        System.out.println(avatar);
-
-//        youtubeModel.setName(name);
-//        youtubeModel.setMessage(message);
-//        youtubeModel.setAvatar(avatar);
-
-
-        System.out.println(randNumber);
-
 
     }
 }
