@@ -293,6 +293,10 @@ samll {
 /*END education*/
 
 /*START portfolio*/
+
+.view {
+    padding-bottom: 15px;
+}
 .section-portfolio {
     padding: 3em 0;
 }
